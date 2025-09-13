@@ -1,0 +1,152 @@
+{
+  "input": [
+    {
+      "type": "v2rayGeoIPDat",
+      "action": "add",
+      "args": {
+        "uri": "https://github.com/Loyalsoldier/geoip/raw/release/geoip.dat"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "ru",
+        "uri": "https://raw.githubusercontent.com/herrbischoff/country-ip-blocks/refs/heads/master/ipv4/ru.cidr"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "ru",
+        "uri": "https://raw.githubusercontent.com/herrbischoff/country-ip-blocks/refs/heads/master/ipv6/ru.cidr"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "ru-blocked",
+        "uri": "https://antifilter.download/list/allyouneed.lst"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "ru-blocked",
+        "uri": "https://community.antifilter.download/list/community.lst"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "akamai",
+        "uri": "https://techdocs.akamai.com/property-manager/pdfs/akamai_ipv4_CIDRs.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "akamai",
+        "uri": "https://techdocs.akamai.com/property-manager/pdfs/akamai_ipv6_CIDRs.txt"
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "discord",
+        "uri": "https://raw.githubusercontent.com/itdoginfo/allow-domains/refs/heads/main/Subnets/IPv4/discord.lst"
+      }
+    },
+    {
+      "type": "json",
+      "action": "add",
+      "args": {
+        "name": "g-core",
+        "uri": "https://api.gcore.com/cdn/public-ip-list",
+        "jsonPath": ["addresses", "addresses_v6"]
+      }
+    },
+    {
+      "type": "maxmindGeoLite2ASNCSV",
+      "action": "add",
+      "args": {
+        "ipv4": "https://github.com/Loyalsoldier/geoip/raw/release/GeoLite2-ASN-Blocks-IPv4.csv",
+        "ipv6": "https://github.com/Loyalsoldier/geoip/raw/release/GeoLite2-ASN-Blocks-IPv6.csv",
+        "wantedList": {
+          "akamai": ["AS63949"],
+          "cdn77": ["AS60068"],
+          "digitalocean": ["AS14061"],
+          "hetzner": ["AS24940"],
+          "ovh": ["AS16276"],
+          "scaleway": ["AS12876"],
+          "vultr": ["AS20473"],
+          "yandex": ["AS44534", "AS13238", "AS200350", "AS215013", "AS210656"]
+        }
+      }
+    },
+    {
+      "type": "private",
+      "action": "add"
+    }
+  ],
+  "output": [
+    {
+      "type": "v2rayGeoIPDat",
+      "action": "output",
+      "args": {
+        "outputDir": "./output",
+        "outputName": "geoip.dat",
+        "wantedList": ["ru", "ru-blocked", "private", "akamai", "cdn77", "cloudflare", "cloudfront", "digitalocean", "discord", "fastly", "g-core", "telegram", "hetzner", "ovh", "vultr", "scaleway", "yandex"]
+      }
+    },
+    {
+      "type": "v2rayGeoIPDat",
+      "action": "output",
+      "args": {
+        "oneFilePerList": true
+      }
+    },
+    {
+      "type": "maxmindMMDB",
+      "action": "output",
+      "args": {
+        "outputDir": "./output",
+        "outputName": "Country.mmdb",
+        "overwriteList": ["ru", "ru-blocked", "private", "akamai", "cdn77", "cloudflare", "cloudfront", "digitalocean", "discord", "fastly", "g-core", "telegram", "hetzner", "ovh", "vultr", "scaleway", "yandex"]
+      }
+    },
+    {
+      "type": "singboxSRS",
+      "action": "output"
+    },
+    {
+      "type": "mihomoMRS",
+      "action": "output"
+    },
+    {
+      "type": "text",
+      "action": "output"
+    },
+    {
+      "type": "clashRuleSetClassical",
+      "action": "output"
+    },
+    {
+      "type": "clashRuleSet",
+      "action": "output"
+    },
+    {
+      "type": "surgeRuleSet",
+      "action": "output",
+      "args": {
+        "addSuffixInLine": ",no-resolve"
+      }
+    }
+  ]
+}
